@@ -21,6 +21,9 @@
                     <td>{{{ $post->updated_at }}}</td>
                     <td><a href="/posts/show/{{{ $post->id }}}" class="btn btn-default btn-xs">詳細</a></td>
                     <td><a href="/posts/edit/{{{ $post->id }}}" class="btn btn-success btn-xs">編集</a></td>
+                    {!! Form::open(['action' => ['PostsController@postDelete', $post->id]]) !!}
+                        <td><button type="submit" class="btn btn-danger btn-xs">削除</button></td>
+                    {!! Form::close() !!}
                 </tr>
                 @endforeach
             </tbody>

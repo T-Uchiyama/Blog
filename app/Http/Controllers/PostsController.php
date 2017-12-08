@@ -93,11 +93,21 @@ class PostsController extends Controller
         $post->fill($requestData);
         $post->save();
 
-        return  redirect()->to('posts/index');
+        return redirect()->to('posts/index');
     }
 
-    public function postDelete()
+    /**
+     * 記事削除
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postDelete($id)
     {
+        //TODO: 確認を促すアラートを追加。
+        //TODO: 論理削除に対応未実施。
+        $post = $this->post->find($id);
+        $post->delete();
 
+        return redirect()->to('posts/index');
     }
 }

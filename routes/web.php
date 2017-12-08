@@ -21,4 +21,5 @@ Route::get('/', function () {
     $this->post('/posts/create', 'PostsController@postCreate');
     $this->get('/posts/edit/{id}', 'PostsController@getEdit');
     $this->post('/posts/edit/{id}', 'PostsController@postEdit');
+    $this->post('/posts/delete/{id}', 'PostsController@postDelete');
 
