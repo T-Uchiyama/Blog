@@ -17,4 +17,6 @@ Route::get('/', function () {
     Route::resource('posts', 'PostsController');
     Route::get('/posts', 'PostsController@getIndex')->name('post');
     $this->get('/posts/show/{id}', 'PostsController@getShow');
+    $this->get('/posts/create', 'PostsController@getCreate');
+    $this->post('/posts/create', 'PostsController@postCreate');
 

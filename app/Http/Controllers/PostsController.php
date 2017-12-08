@@ -25,7 +25,7 @@ class PostsController extends Controller
 
     /**
      * 記事一覧
-     * @return \Illuminate\View\View\
+     * @return \Illuminate\View\View
      */
     public function getIndex()
     {
@@ -36,7 +36,7 @@ class PostsController extends Controller
     /**
      * 記事詳細
      * @param $id
-     * @return \Illuminate\View\View\
+     * @return \Illuminate\View\View
      */
     public function getShow($id)
     {
@@ -44,14 +44,27 @@ class PostsController extends Controller
         return view('posts.show', compact('posts'));
     }
 
+    /**
+     * 記事投稿
+     * @return \Illuminate\View\View\
+     */
     public function getCreate()
     {
-
+        return view('posts.create');
     }
 
-    public function postCreate()
+    /**
+     *  記事投稿
+     * @param  Request $request
+     * @return  \Illuminate\Http\RedirectResponse
+     */
+    public function postCreate(Request $request)
     {
+        $requestData = $request->all();
+        $this->post->fill($requestData);
+        $this->article->save();
 
+        return redirect()->to('posts/index');
     }
 
     public function getEdit()
