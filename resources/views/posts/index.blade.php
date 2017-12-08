@@ -20,6 +20,7 @@
                     <td>{{{ $post->created_at }}}</td>
                     <td>{{{ $post->updated_at }}}</td>
                     <td><a href="/posts/show/{{{ $post->id }}}" class="btn btn-default btn-xs">詳細</a></td>
+                    <td><a href="/posts/edit/{{{ $post->id }}}" class="btn btn-success btn-xs">編集</a></td>
                 </tr>
                 @endforeach
             </tbody>

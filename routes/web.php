@@ -19,4 +19,6 @@ Route::get('/', function () {
     $this->get('/posts/show/{id}', 'PostsController@getShow');
     $this->get('/posts/create', 'PostsController@getCreate');
     $this->post('/posts/create', 'PostsController@postCreate');
+    $this->get('/posts/edit/{id}', 'PostsController@getEdit');
+    $this->post('/posts/edit/{id}', 'PostsController@postEdit');
 

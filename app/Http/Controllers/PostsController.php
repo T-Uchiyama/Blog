@@ -41,6 +41,7 @@ class PostsController extends Controller
     public function getShow($id)
     {
         $posts = $this->post->find($id);
+
         return view('posts.show', compact('posts'));
     }
 
@@ -67,14 +68,32 @@ class PostsController extends Controller
         return redirect()->to('posts/index');
     }
 
-    public function getEdit()
+    /**
+     * 記事編集
+     * @param $id
+     * @return \Illuminate\View\View
+     */
+    public function getEdit($id)
     {
+        $posts = $this->post->find($id);
 
+        return view('posts.edit', compact('posts'));
     }
 
-    public function postEdit()
+    /**
+     * 記事編集
+     * @param  Request $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function postEdit(Request $request, $id)
     {
+        $posts = $this->post->find($id);
+        $requestData = $request->all();
+        $post->fill($requestData);
+        $post->save();
 
+        return  redirect()->to('posts/index');
     }
 
     public function postDelete()
