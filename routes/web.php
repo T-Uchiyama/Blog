@@ -15,5 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
     Route::resource('posts', 'PostsController');
-    Route::get('/', 'PostsController@getIndex');
+    Route::get('/posts', 'PostsController@getIndex')->name('post');
+    $this->get('/posts/show/{id}', 'PostsController@getShow');
 

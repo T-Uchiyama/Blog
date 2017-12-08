@@ -30,12 +30,18 @@ class PostsController extends Controller
     public function getIndex()
     {
         $posts = $this->post->all();
-        return view ('posts.index')->with(compact('posts'));
+        return view('posts.index', compact('posts'));
     }
 
-    public function getShow()
+    /**
+     * 記事詳細
+     * @param $id
+     * @return \Illuminate\View\View\
+     */
+    public function getShow($id)
     {
-
+        $posts = $this->post->find($id);
+        return view('posts.show', compact('posts'));
     }
 
     public function getCreate()
