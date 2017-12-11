@@ -62,8 +62,7 @@ class PostsController extends Controller
     public function postCreate(Request $request)
     {
         $requestData = $request->all();
-        $this->post->fill($requestData);
-        $this->article->save();
+        $this->post->fill($requestData)->save();
 
         return redirect()->to('posts/index');
     }
@@ -88,7 +87,7 @@ class PostsController extends Controller
      */
     public function postEdit(Request $request, $id)
     {
-        $posts = $this->post->find($id);
+        $post = $this->post->find($id);
         $requestData = $request->all();
         $post->fill($requestData);
         $post->save();
