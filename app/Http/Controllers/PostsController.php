@@ -64,7 +64,7 @@ class PostsController extends Controller
         $requestData = $request->all();
         $this->post->fill($requestData)->save();
 
-        return redirect()->to('posts/index');
+        return redirect()->route('post');
     }
 
     /**
@@ -92,7 +92,7 @@ class PostsController extends Controller
         $post->fill($requestData);
         $post->save();
 
-        return redirect()->to('posts/index');
+        return redirect()->route('post');
     }
 
     /**
@@ -107,6 +107,6 @@ class PostsController extends Controller
         $post = $this->post->find($id);
         $post->delete();
 
-        return redirect()->to('posts/index');
+        return redirect()->route('post');
     }
 }

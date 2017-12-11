@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
     Route::resource('posts', 'PostsController');
     Route::get('/posts', 'PostsController@getIndex')->name('post');
-    $this->get('/posts/show/{id}', 'PostsController@getShow');
-    $this->get('/posts/create', 'PostsController@getCreate');
-    $this->post('/posts/create', 'PostsController@postCreate');
-    $this->get('/posts/edit/{id}', 'PostsController@getEdit');
-    $this->post('/posts/edit/{id}', 'PostsController@postEdit');
-    $this->post('/posts/delete/{id}', 'PostsController@postDelete');
+    Route::get('/posts/show/{id}', 'PostsController@getShow');
+    Route::get('/posts/create', 'PostsController@getCreate');
+    Route::post('/posts/create', 'PostsController@postCreate');
+    Route::get('/posts/edit/{id}', 'PostsController@getEdit');
+    Route::post('/posts/edit/{id}', 'PostsController@postEdit');
+    Route::post('/posts/delete/{id}', 'PostsController@postDelete');
 
