@@ -2,6 +2,9 @@
 
     @section('content')
         <h2 class="page-header">記事一覧</h2>
+        <a href="/posts/create/" class="btn btn-primary">
+            <i class="fa fa-btn fa-trash"></i>記事作成
+        </a>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
