@@ -9,6 +9,15 @@
                     <th>タイトル</th>
                     <td>{{{ $posts->title }}}</td>
                 </tr>
+                <!-- Category -->
+                <tr>
+                    <th>カテゴリ</th>
+                    @foreach ($categoryList as $key => $value)
+                        @if ($key === $posts->category_id)
+                            <td>{{ $value }}</td>
+                        @endif
+                    @endforeach
+                </tr>
                 <!-- body -->
                 <tr>
                     <th>本文</th>

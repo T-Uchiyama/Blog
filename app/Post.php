@@ -18,7 +18,7 @@ class Post extends Model
      *
      * @var array
      */
-    protected $fillable = ['title', 'body'];
+    protected $fillable = ['title', 'body', 'category_id'];
 
     public function comments() {
         return $this->hasMany('App\Comment');
@@ -27,4 +27,8 @@ class Post extends Model
 	public function user() {
 		return $this->belongsTo('App\User');
 	}
+
+    public function categories() {
+        return $this->belongsTo('App\Category');
+    }
 }

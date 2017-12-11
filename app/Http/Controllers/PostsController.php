@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\Category;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -41,8 +42,9 @@ class PostsController extends Controller
     public function getShow($id)
     {
         $posts = $this->post->find($id);
+        $categoryList = $this->getCategorylist();
 
-        return view('posts.show', compact('posts'));
+        return view('posts.show', compact('posts', 'categoryList'));
     }
 
     /**
@@ -51,7 +53,9 @@ class PostsController extends Controller
      */
     public function getCreate()
     {
-        return view('posts.create');
+        $categoryList = $this->getCategorylist();
+
+        return view('posts.create', compact('categoryList'));
     }
 
     /**
@@ -61,6 +65,12 @@ class PostsController extends Controller
      */
     public function postCreate(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => 'required',
+            'category_id' => 'required',
+        ]);
+
         $requestData = $request->all();
         $this->post->fill($requestData)->save();
 
@@ -75,8 +85,9 @@ class PostsController extends Controller
     public function getEdit($id)
     {
         $posts = $this->post->find($id);
+        $categoryList = $this->getCategorylist();
 
-        return view('posts.edit', compact('posts'));
+        return view('posts.edit', compact('posts', 'categoryList'));
     }
 
     /**
@@ -102,11 +113,21 @@ class PostsController extends Controller
      */
     public function postDelete($id)
     {
-        //TODO: 確認を促すアラートを追加。
         //TODO: 論理削除に対応未実施。
         $post = $this->post->find($id);
         $post->delete();
 
         return redirect()->route('post');
+    }
+
+    /**
+     * カテゴリ一覧取得
+     * @return List CategoryData
+     */
+    public function getCategorylist()
+    {
+        $category = Category::find(1);
+
+        return $category->getCategorylist();
     }
 }
