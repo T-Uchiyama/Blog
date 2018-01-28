@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\AdminAuth;
 
-use App\User;
+use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +27,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/admin/home';
+    protected $linkRequestView = 'adminAuth.passwords.email';
+    protected $resetView = 'adminAuth.passwords.reset';
+    protected $guard = 'admin';
+    protected $broker = 'admins';
 
     /**
      * Create a new controller instance.
@@ -36,7 +40,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest:admin');
     }
 
     /**
@@ -62,10 +66,21 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'remember_token' => str_random(10),
         ]);
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('adminAuth.register');
+    }
+
+    protected function guard()
+    {
+        return \Auth::guard('admin');
     }
 }
